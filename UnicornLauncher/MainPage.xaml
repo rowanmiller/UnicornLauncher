@@ -1,0 +1,42 @@
+﻿<Page
+    x:Class="UnicornLauncher.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UnicornLauncher"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+            <RelativePanel VerticalAlignment="Stretch"  Background="#FF140044">
+                <StackPanel Margin="10,60,5,5">
+                    <Button Name="LaunchControl" Click="LaunchControl_Click" Style="{StaticResource SymbolButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <Grid>
+                                <Ellipse Width="50" Height="50" StrokeThickness="2" Stroke="White"></Ellipse>
+                                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8F0;" />
+                            </Grid>
+                            <TextBlock Text="Launch Control" Margin="10,0,0,0" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                    <Button Name="LaunchHistory" Click="LaunchHistory_Click"  Style="{StaticResource SymbolButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <Grid>
+                                <Ellipse Width="50" Height="50" StrokeThickness="2" Stroke="White"></Ellipse>
+                                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE71D;" />
+                            </Grid>
+                            <TextBlock Text="Launch History" Margin="10,0,0,0" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                <StackPanel RelativePanel.AlignBottomWithPanel="True" Margin="10">
+                    <Image Source="Assets/LogoFlipped.png" Stretch="None" HorizontalAlignment="Left" />
+                    <TextBlock Text="Unicorn Launcher" Style="{StaticResource HeaderTextStyle}" />
+                    <TextBlock Text="Who said unicorns can't fly" Style="{StaticResource TagLineTextStyle}" />
+                </StackPanel>
+            </RelativePanel>
+            <Frame x:Name="ScenarioFrame" Margin="20" />
+        </StackPanel>
+    </Grid>
+</Page>
