@@ -10,7 +10,7 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel>
-            <TextBlock FontSize="72" Text="Launch History" />
+            <TextBlock FontSize="60" Text="History" />
             <ListView Name="HistoryGrid" SelectionMode="None" Margin="0,10">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
@@ -24,8 +24,8 @@
                         <StackPanel Margin="0,10">
 
                             <StackPanel>
-                                <TextBlock FontSize="48" Text="{Binding Launched}" />
-                                <TextBlock FontSize="24" Text="{Binding Info}" />
+                                <TextBlock FontSize="24" Text="{Binding Launched}" />
+                                <TextBlock FontSize="18" Text="{Binding Info}" />
                             </StackPanel>
 
                         </StackPanel>

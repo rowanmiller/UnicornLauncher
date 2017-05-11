@@ -26,7 +26,6 @@ namespace UnicornLauncher
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        
         public MainPage()
         {
             this.InitializeComponent();
@@ -46,22 +45,5 @@ namespace UnicornLauncher
         {
             ScenarioFrame.Navigate(typeof(Admin));
         }
-    }
-
-    public class UnicornLauncherContext : DbContext
-    {
-        public DbSet<Launch> Launches { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlite("Filename=launchdata.db");
-        }
-    }
-
-    public class Launch
-    {
-        public int LaunchId { get; set; }
-        public DateTime Launched { get; set; }
-        public string Info { get; set; }
     }
 }

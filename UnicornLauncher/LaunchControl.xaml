@@ -11,7 +11,7 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <RelativePanel VerticalAlignment="Stretch">
             <StackPanel >
-                <TextBlock FontSize="72" Text="Launch Control" />
+                <TextBlock FontSize="60" Text="Control" />
                 <MediaElement Name="uiMediaElement" />
                 <Button Click="InitiateLaunch_Click" Style="{StaticResource SymbolButton}">
                     <StackPanel>

@@ -1,39 +1,37 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
+using UnicornLauncher.Model;
 using Windows.Devices.Gpio;
 using Windows.Media.SpeechSynthesis;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace UnicornLauncher
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class LaunchControl : Page
     {
-        private GpioPin _pin;
+        private static GpioPin _pin;
         private DispatcherTimer _controlTimer;
         private int _secondsUntilLaunch;
-        private IRandomAccessStream _speechStream;
 
         public LaunchControl()
         {
             this.InitializeComponent();
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {
-                var gpio = GpioController.GetDefault();
-                _pin = gpio.OpenPin(5);
-                _pin.Write(GpioPinValue.High);
-                _pin.SetDriveMode(GpioPinDriveMode.Output);
+                if (_pin == null)
+                {
+                    var gpio = GpioController.GetDefault();
+                    _pin = gpio.OpenPin(5);
+                    _pin.Write(GpioPinValue.High);
+                    _pin.SetDriveMode(GpioPinDriveMode.Output);
+                }
+                Diagnostics.Text = "I/O initialized";
             }
             catch (Exception)
             {
@@ -43,6 +41,8 @@ namespace UnicornLauncher
             _controlTimer = new DispatcherTimer();
             _controlTimer.Interval = TimeSpan.FromSeconds(1);
             _controlTimer.Tick += ProcessTimerTick;
+
+            await uiMediaElement.SpeakTextAsync("Good morning Build, welcome to launch control");
         }
 
         private async void InitiateLaunch_Click(object sender, RoutedEventArgs e)
@@ -80,18 +80,8 @@ namespace UnicornLauncher
 
         private async Task ProvideStatusUpdate(string status)
         {
-            var t = SpeakTextAsync(status);
             Status.Text = status;
-            await t;
-        }
-
-        async Task SpeakTextAsync(string text)
-        {
-            using (SpeechSynthesizer synthesizer = new SpeechSynthesizer())
-            {
-                var stream = await synthesizer.SynthesizeTextToStreamAsync(text);
-                await uiMediaElement.PlayStreamAsync(stream, true);
-            }
+            await uiMediaElement.SpeakTextAsync(status);
         }
 
         private void RecordLaunch()

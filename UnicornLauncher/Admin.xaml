@@ -9,23 +9,33 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel>
-            <TextBlock FontSize="72" Text="Admin" />
+            <TextBlock FontSize="60" Text="Admin" />
             <Button Click="Reset_Click" Style="{StaticResource SymbolButton}">
                 <StackPanel>
                     <Grid>
-                        <Ellipse Width="100" Height="100" StrokeThickness="2" Stroke="White"></Ellipse>
-                        <FontIcon FontSize="65" FontFamily="Segoe MDL2 Assets" Glyph="&#xE7A7;" />
+                        <Ellipse Width="50" Height="50" StrokeThickness="2" Stroke="White"></Ellipse>
+                        <FontIcon FontSize="32" FontFamily="Segoe MDL2 Assets" Glyph="&#xE7A7;" />
                     </Grid>
-                    <TextBlock Text="Reset" FontSize="28" Margin="10,0,0,0" HorizontalAlignment="Center" />
+                    <TextBlock Text="Reset" FontSize="18" Margin="10,0,0,0" HorizontalAlignment="Center" />
                 </StackPanel>
             </Button>
             <Button Click="Exit_Click" Style="{StaticResource SymbolButton}">
                 <StackPanel>
                     <Grid>
-                        <Ellipse Width="100" Height="100" StrokeThickness="2" Stroke="White"></Ellipse>
-                        <FontIcon FontSize="65" FontFamily="Segoe MDL2 Assets" Glyph="&#xE711;" />
+                        <Ellipse Width="50" Height="50" StrokeThickness="2" Stroke="White"></Ellipse>
+                        <FontIcon FontSize="32" FontFamily="Segoe MDL2 Assets" Glyph="&#xE711;" />
                     </Grid>
-                    <TextBlock Text="Exit" FontSize="28" Margin="10,0,0,0" HorizontalAlignment="Center" />
+                    <TextBlock Text="Exit" FontSize="18" Margin="10,0,0,0" HorizontalAlignment="Center" />
+                </StackPanel>
+            </Button>
+            <MediaElement Name="uiMediaElement" />
+            <Button Click="Talk_Click" Style="{StaticResource SymbolButton}">
+                <StackPanel>
+                    <Grid>
+                        <Ellipse Width="50" Height="50" StrokeThickness="2" Stroke="White"></Ellipse>
+                        <FontIcon FontSize="32" FontFamily="Segoe MDL2 Assets" Glyph="&#xE767;" />
+                    </Grid>
+                    <TextBlock Text="Talk" FontSize="18" Margin="10,0,0,0" HorizontalAlignment="Center" />
                 </StackPanel>
             </Button>
 
