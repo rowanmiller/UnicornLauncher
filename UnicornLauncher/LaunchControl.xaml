@@ -9,18 +9,20 @@
     Loaded="Page_Loaded">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <RelativePanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-            <StackPanel>
+        <RelativePanel VerticalAlignment="Stretch">
+            <StackPanel >
+                <TextBlock FontSize="72" Text="Launch Control" />
+                <MediaElement Name="uiMediaElement" />
                 <Button Click="InitiateLaunch_Click" Style="{StaticResource SymbolButton}">
                     <StackPanel>
                         <Grid>
                             <Ellipse Width="100" Height="100" StrokeThickness="2" Stroke="White"></Ellipse>
                             <FontIcon FontSize="65" FontFamily="Segoe MDL2 Assets" Glyph="&#xE8E1;" />
                         </Grid>
-                        <TextBlock Text="Launch" FontSize="28" Margin="10,0,0,0" HorizontalAlignment="Center" />
+                        <TextBlock Text="Launch" FontSize="28" Margin="10,0,0,0" />
                     </StackPanel>
                 </Button>
-                <TextBlock FontSize="50" Name="Status" HorizontalAlignment="Center" />
+                <TextBlock FontSize="50" Name="Status" Margin="20" />
             </StackPanel>
             <StackPanel RelativePanel.AlignBottomWithPanel="True">
                 <TextBlock Name="Diagnostics" />

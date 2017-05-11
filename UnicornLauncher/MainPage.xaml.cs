@@ -39,7 +39,12 @@ namespace UnicornLauncher
 
         private void LaunchHistory_Click(object sender, RoutedEventArgs e)
         {
-            CoreApplication.Exit();
+            ScenarioFrame.Navigate(typeof(History));
+        }
+
+        private void Admin_Click(object sender, RoutedEventArgs e)
+        {
+            ScenarioFrame.Navigate(typeof(Admin));
         }
     }
 
@@ -49,7 +54,7 @@ namespace UnicornLauncher
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Filename=data.db");
+            optionsBuilder.UseSqlite("Filename=launchdata.db");
         }
     }
 
@@ -57,5 +62,6 @@ namespace UnicornLauncher
     {
         public int LaunchId { get; set; }
         public DateTime Launched { get; set; }
+        public string Info { get; set; }
     }
 }

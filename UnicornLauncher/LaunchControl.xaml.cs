@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Windows.Devices.Gpio;
+using Windows.Media.SpeechSynthesis;
+using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -16,6 +19,7 @@ namespace UnicornLauncher
         private GpioPin _pin;
         private DispatcherTimer _controlTimer;
         private int _secondsUntilLaunch;
+        private IRandomAccessStream _speechStream;
 
         public LaunchControl()
         {
@@ -41,36 +45,52 @@ namespace UnicornLauncher
             _controlTimer.Tick += ProcessTimerTick;
         }
 
-        private void InitiateLaunch_Click(object sender, RoutedEventArgs e)
+        private async void InitiateLaunch_Click(object sender, RoutedEventArgs e)
         {
-            InitiateLaunchSequence();
+            await InitiateLaunchSequence();
         }
 
-        private void InitiateLaunchSequence()
+        private async Task InitiateLaunchSequence()
         {
-            Status.Text = "Launch Initiated";
-            _secondsUntilLaunch = 6;
+            await ProvideStatusUpdate("Launch Initiated");
+            _secondsUntilLaunch = 11;
             _controlTimer.Start();
         }
 
-        private void ProcessTimerTick(object sender, object e)
+        private async void ProcessTimerTick(object sender, object e)
         {
             _secondsUntilLaunch--;
 
             if (_secondsUntilLaunch > 0)
             {
-                Status.Text = _secondsUntilLaunch.ToString();
+                await ProvideStatusUpdate(_secondsUntilLaunch.ToString());
             }
             else if (_secondsUntilLaunch == 0)
             {
-                Status.Text = "0";
-                _pin.Write(GpioPinValue.Low);
+                Status.Text = "Lift off";
+                _pin?.Write(GpioPinValue.Low);
             }
             else if (_secondsUntilLaunch < 0)
             {
-                _pin.Write(GpioPinValue.High);
+                _pin?.Write(GpioPinValue.High);
                 _controlTimer.Stop();
                 RecordLaunch();
+            }
+        }
+
+        private async Task ProvideStatusUpdate(string status)
+        {
+            var t = SpeakTextAsync(status);
+            Status.Text = status;
+            await t;
+        }
+
+        async Task SpeakTextAsync(string text)
+        {
+            using (SpeechSynthesizer synthesizer = new SpeechSynthesizer())
+            {
+                var stream = await synthesizer.SynthesizeTextToStreamAsync(text);
+                await uiMediaElement.PlayStreamAsync(stream, true);
             }
         }
 
@@ -78,18 +98,19 @@ namespace UnicornLauncher
         {
             try
             {
+                Diagnostics.Text = "Saving launch information...";
+
                 using (var db = new UnicornLauncherContext())
                 {
-                    db.Database.EnsureCreated();
-                    db.Launches.Add(new Launch { Launched = DateTime.Now });
+                    db.Launches.Add(new Launch { Launched = DateTime.Now, Info = "Build demo launch" });
                     db.SaveChanges();
-
-                    Diagnostics.Text = $"{db.Launches.Count()} launches in db";
                 }
+
+                Diagnostics.Text = "Launch information saved";
             }
             catch (Exception ex)
             {
-                Diagnostics.Text = ex.ToString();
+                Diagnostics.Text = "Failed to save launch: " + ex.ToString();
             }
         }
     }

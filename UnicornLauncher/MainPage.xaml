@@ -29,6 +29,15 @@
                             <TextBlock Text="Launch History" Margin="10,0,0,0" VerticalAlignment="Center" />
                         </StackPanel>
                     </Button>
+                    <Button Name="Admin" Click="Admin_Click"  Style="{StaticResource SymbolButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <Grid>
+                                <Ellipse Width="50" Height="50" StrokeThickness="2" Stroke="White"></Ellipse>
+                                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE713;" />
+                            </Grid>
+                            <TextBlock Text="Admin" Margin="10,0,0,0" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
                 </StackPanel>
                 <StackPanel RelativePanel.AlignBottomWithPanel="True" Margin="10">
                     <Image Source="Assets/LogoFlipped.png" Stretch="None" HorizontalAlignment="Left" />
