@@ -8,7 +8,7 @@ namespace UnicornLauncher.Model
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Filename=launchdata.db");
+            // TODO Configure the database
         }
     }
 }

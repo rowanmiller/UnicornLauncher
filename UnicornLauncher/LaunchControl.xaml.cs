@@ -90,11 +90,10 @@ namespace UnicornLauncher
             {
                 Diagnostics.Text = "Saving launch information...";
 
-                using (var db = new UnicornLauncherContext())
-                {
-                    db.Launches.Add(new Launch { Launched = DateTime.Now, Info = "Build demo launch" });
-                    db.SaveChanges();
-                }
+                var launch = new Launch { Launched = DateTime.Now, Info = "Build demo launch" };
+
+                // TODO Save launch to database
+                
 
                 Diagnostics.Text = "Launch information saved";
             }
