@@ -42,7 +42,7 @@ namespace UnicornLauncher
             _controlTimer.Interval = TimeSpan.FromSeconds(1);
             _controlTimer.Tick += ProcessTimerTick;
 
-            await uiMediaElement.SpeakTextAsync("Good morning Build, welcome to launch control");
+            await uiMediaElement.SpeakTextAsync("Good morning Dev Intersection, welcome to launch control");
         }
 
         private async void InitiateLaunch_Click(object sender, RoutedEventArgs e)
@@ -92,7 +92,7 @@ namespace UnicornLauncher
 
                 using (var db = new UnicornLauncherContext())
                 {
-                    db.Launches.Add(new Launch { Launched = DateTime.Now, Info = "Build demo launch" });
+                    db.Launches.Add(new Launch { Launched = DateTime.Now, Info = "DevIntersection demo launch" });
                     db.SaveChanges();
                 }
 
